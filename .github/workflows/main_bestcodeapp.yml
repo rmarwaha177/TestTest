@@ -14,13 +14,14 @@ jobs:
     runs-on: windows-latest
 
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up .NET Core
-        uses: actions/setup-dotnet@v1
-        with:
-          dotnet-version: '6.0.x'
-          include-prerelease: true
+     - name: Checkout code
+        uses: actions/checkout@v2
+      - name: Print current directory
+        run: pwd
+      - name: Build project
+        run: |
+          cd path/to/project
+          dotnet build --configuration Release
 
       - name: Build with dotnet
         run: dotnet build --configuration Release
