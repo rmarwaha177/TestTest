@@ -18,7 +18,7 @@ jobs:
         run: pwd
       - name: Build project
         run: |
-          cd path/to/project
+          cd..
           dotnet build --configuration Release
 
       - name: Build with dotnet
