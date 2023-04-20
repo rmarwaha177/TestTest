@@ -22,15 +22,17 @@ jobs:
           dotnet-version: '6.0.x'
           include-prerelease: true
 
-     
+      - name: Build with dotnet
+        run: dotnet build --configuration Release
+
       - name: dotnet publish
-        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}\TestTest
+        run: dotnet publish -c Release -o ${{env.DOTNET_ROOT}}/myapp
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
           name: .net-app
-          path: ${{env.DOTNET_ROOT}}/TestTestSln
+          path: ${{env.DOTNET_ROOT}}/myapp
 
   deploy:
     runs-on: windows-latest
@@ -51,5 +53,5 @@ jobs:
         with:
           app-name: 'BestCodeApp'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_F1701BB974B74BA8AC15BC5A40865558 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_030D5AB1296F42E1B06ECA245BDB782C }}
           package: .
